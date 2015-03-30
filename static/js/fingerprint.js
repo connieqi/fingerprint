@@ -1,23 +1,23 @@
 var getFingerprint = function() {
-    var fp = [];
-    fp.push(navigator.userAgent);
-    fp.push(navigator.cookieEnabled);
-    fp.push(navigator.language)
-    fp.push(navigator.cpuClass);
-    fp.push(navigator.platform);
-    fp.push(navigator.doNotTrack);
-    fp.push(screen.width + 'x' + screen.height);    // Computer screen, not browser window
-    fp.push(screen.colorDepth);
-    fp.push(new Date().getTimezoneOffset());
-    fp.push(getPluginsString());
-    fp.push(getCanvasString());
+    var fp = {};
+    fp.userAgent = navigator.userAgent;
+    fp.cookiesEnabled = navigator.cookieEnabled;
+    fp.language = navigator.language;
+    fp.cpuClass = navigator.cpuClass;
+    fp.platform = navigator.platform;
+    fp.doNotTrack = navigator.doNotTrack;
+    fp.screenResolution = screen.width + 'x' + screen.height;    // Computer screen, not browser window
+    fp.screenColorDepth = screen.colorDepth;
+    fp.timezoneOffset = new Date().getTimezoneOffset();
+    fp.plugins = getPluginsString();
+    fp.canvasFingerprint = getCanvasString();
     console.log(navigator);
 
     // getHTTPHeader(function(headers){
     //     console.log(headers);
     // });
 
-    console.log(fp.join(','));
+    console.log(fp);
     return fp;
 };
 
@@ -82,9 +82,37 @@ function receiveResponse(e)
     }
 }
 
+var displayFp = function(fp) {
+    for (var key in fp) {
+        var val = fp[key];
+        $('#details').append('<tr class="details-row center"></tr>');
+        $('.details-row:last').append('<td class="key">' + toCapitalized(key) + '</td>');
+        $('.details-row:last').append('<td><div class="val">' + val + '</div></td>');
+    }
+}
+
+var getHashedFp = function(fp) {
+    fpArray = [];
+    for (var key in fp) {
+        fpArray.push(fp[key]);
+    }
+    return CryptoJS.SHA3(fpArray.join('#'));
+}
+
+function toCapitalized(name) {
+    var words = name.match(/[A-Za-z][a-z]*/g);
+
+    return words.map(capitalize).join(" ");
+}
+
+function capitalize(word) {
+    return word.charAt(0).toUpperCase() + word.substring(1);
+}
+
 $(document).ready(function() {
     var fp = getFingerprint();
-    $('#fp-details').text(fp);
-    var hashedFp = CryptoJS.SHA3(fp.join('#'));
+    // $('#details').text(fp);
+    displayFp(fp);
+    var hashedFp = getHashedFp(fp);
     $('#fp').text(String(hashedFp));
 });

@@ -1,0 +1,56 @@
+html,body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 100%;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.center-text {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: block;
+}
+
+#fp {
+    width: 550px;
+    word-wrap: break-word;
+}
+
+#details {
+    width: 700px;
+    /*height: 100%;*/
+    /*display: block;*/
+}
+
+.details-row {
+    width: 700px;
+    height: 100%;
+    /*padding: 3px;*/
+    /*clear: both;*/
+}
+
+.key {
+    width: 190px;
+    /*height: 100%;*/
+    padding: 5px;
+    background-color: Plum;
+    /*float: left;*/
+    /*display: inline-block;*/
+    /*word-wrap: break-word;*/
+}
+
+.val {
+    width: 490px;
+    max-height: 300px;
+    padding: 5px;
+    background-color: MintCream;
+    /*float: left;*/
+    /*display: inline-block;*/
+    word-wrap: break-word;
+    overflow-y: scroll;
+}

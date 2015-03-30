@@ -5,11 +5,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
     <script src="{{ url_for('static', filename='js/fingerprint.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></link>
 </head>
 <body>
-    <h3>Hey there, your browser fingerprint is: </h3>
-    <div id="fp"></div>
-    <h4>Details: </h4>
-    <div id="fp-details"></div>
+    <h3 class="center-text">Hey there, your browser fingerprint is: </h3>
+    <div id="fp" class="center-text"></div>
+    <h4 class="center-text">Details: </h4>
+    <table id="details" class="center"></table>
 </body>
 </html>
