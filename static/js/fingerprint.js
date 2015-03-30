@@ -96,7 +96,7 @@ var getHashedFp = function(fp) {
     for (var key in fp) {
         fpArray.push(fp[key]);
     }
-    return CryptoJS.SHA3(fpArray.join('#'));
+    return String(CryptoJS.SHA3(fpArray.join('#')));
 }
 
 function toCapitalized(name) {
@@ -111,8 +111,7 @@ function capitalize(word) {
 
 $(document).ready(function() {
     var fp = getFingerprint();
-    // $('#details').text(fp);
     displayFp(fp);
     var hashedFp = getHashedFp(fp);
-    $('#fp').text(String(hashedFp));
+    $('#fp').text(hashedFp);
 });
