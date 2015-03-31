@@ -1,7 +1,7 @@
 # Browser Fingerprinting
 Demo for EECS 588 web tracking and privacy presentation.
 
-Calculates your browser fingerprint by looking at the following values:
+Here's a web app that generates your browser fingerprint by looking at the following values:
 - Useragent
 - Cookies enabled?
 - Language
