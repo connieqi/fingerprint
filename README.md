@@ -18,6 +18,7 @@ Calculates your browser fingerprint by looking at the following values:
 The fingerprint is then calculated using a SHA3 hash.
 
 Check it out live: http://bfp588.herokuapp.com/
+
 NOTE: we do not collect fingerprints from visitors, this is client-side only!
 
 Have fun :)
