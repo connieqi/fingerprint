@@ -1,3 +1,5 @@
+
+// ---------- Make Fingerprint ----------
 var getFingerprint = function() {
     var fp = {};
     fp.userAgent = navigator.userAgent;
@@ -13,10 +15,6 @@ var getFingerprint = function() {
     fp.plugins = getPluginsString();
     fp.canvasFingerprint = getCanvasString();
     console.log(navigator);
-
-    // getHTTPHeader(function(headers){
-    //     console.log(headers);
-    // });
 
     console.log(fp);
     return fp;
@@ -53,45 +51,6 @@ var getCanvasString = function() {
     return canvas.toDataURL();
 }
 
-var getHTTPHeader = function(cb) {
-    var req = new XMLHttpRequest();
-    req.open('GET', document.location, true);
-    req.onreadystatechange = receiveResponse;
-    req.send();
-    // var headers = req.getAllResponseHeaders().toLowerCase();
-    // cb(headers);
-};
-
-function makeRequest(url)
-{
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.onreadystatechange = receiveResponse;
-    xhr.send();
-}
-function receiveResponse(e)
-{
-    if (this.readyState == 4)
-    {
-        // xhr.readyState == 4, so we've received the complete server response
-        if (this.status == 200)
-        {
-            // xhr.status == 200, so the response is good
-            var response = this.responseXML;
-            console.log(headers);
-        }
-    }
-}
-
-var displayFp = function(fp) {
-    for (var key in fp) {
-        var val = fp[key];
-        $('#details').append('<tr class="details-row center"></tr>');
-        $('.details-row:last').append('<td class="key">' + toCapitalized(key) + '</td>');
-        $('.details-row:last').append('<td><div class="val">' + val + '</div></td>');
-    }
-}
-
 var getHashedFp = function(fp) {
     fpArray = [];
     for (var key in fp) {
@@ -100,6 +59,7 @@ var getHashedFp = function(fp) {
     return String(CryptoJS.SHA3(fpArray.join('#')));
 }
 
+// ---------- Util ----------
 function toCapitalized(name) {
     var words = name.match(/[A-Za-z][a-z]*/g);
 
@@ -108,6 +68,17 @@ function toCapitalized(name) {
 
 function capitalize(word) {
     return word.charAt(0).toUpperCase() + word.substring(1);
+}
+
+// ---------- UI/runtime ----------
+
+var displayFp = function(fp) {
+    for (var key in fp) {
+        var val = fp[key];
+        $('#details').append('<tr class="details-row center"></tr>');
+        $('.details-row:last').append('<td class="key">' + toCapitalized(key) + '</td>');
+        $('.details-row:last').append('<td><div class="val">' + val + '</div></td>');
+    }
 }
 
 $(document).ready(function() {
